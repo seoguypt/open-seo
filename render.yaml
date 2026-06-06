@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: open-seo
+    runtime: image
+    plan: starter
+    image:
+      url: ghcr.io/every-app/open-seo:latest
+    healthCheckPath: /
+    envVars:
+      - key: CLOUDFLARE_INCLUDE_PROCESS_ENV
+        value: "true"
+      - key: AUTH_MODE
+        value: local_noauth
+      - key: ALLOWED_HOST
+        value: .onrender.com
+      - key: VITE_SHOW_DEVTOOLS
+        value: "false"
+      - key: DATAFORSEO_API_KEY
+        sync: false
+    disk:
+      name: open-seo-data
+      mountPath: /app/.wrangler
+      sizeGB: 1
